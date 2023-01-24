@@ -8,9 +8,12 @@ prog_ver="0.1alpha"
 
 # Import front-end framework
 import customtkinter
+import tkinter as tk
+from tkinter import ttk
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
+
 
 # Import "zipfile" module from python
 ## import zipfile
@@ -30,7 +33,7 @@ customtkinter.set_default_color_theme("dark-blue")
         ##zip.extractall(path="extracted")
 
 window = customtkinter.CTk()
-window.geometry("500x350")
+window.geometry("500x320")
 window.title(prog_nm+"-("+prog_ver+")")
 
 
@@ -40,6 +43,60 @@ def compress():
 
 def option(value):
     print("segmented button clicked:", value)
+
+def command_function(value):
+        if value == "  Compression level":
+          Compression_lvl()
+        elif value == "  Help ":
+          help()
+
+
+    
+def Compression_lvl():
+    style = ttk.Style()
+    style.theme_use("alt")
+    compression_level_window = tk.Toplevel(master=window)
+    compression_level_window.configure(bg = '#1a1a1a')
+    compression_level_window.geometry("400x250+200+200")
+    compression_level_window.transient(master=window)
+    compression_level_window.grab_set()
+    compression_level_window.title("Compression Level")
+    # create a label
+    label = tk.Label(master=compression_level_window, text="Enter the compression level (1-9):")
+    label.grid(row=0, column=0, padx=20, pady=20)
+    # create an entry widget
+    entry = tk.Entry(master=compression_level_window)
+    entry.grid(row=1, column=0, padx=0, pady=0)
+    # create a submit button
+    submit_button = tk.Button(master=compression_level_window, text="Submit", command=lambda: submit_compression_level(entry.get()))
+    submit_button.grid(row=2, column=0, padx=15, pady=15)
+    # add a close button
+    close_button = tk.Button(master=compression_level_window, text="Close", command=compression_level_window.destroy)
+    close_button.grid(row=3, column=0, padx=15, pady=15)
+    compression_level_window.columnconfigure(0, weight=1)
+
+
+def submit_compression_level(level):
+    level = int(level)
+    if level < 1 or level > 9:
+        messagebox.showerror("Error", "Invalid compression level")
+    else:
+        # do something with the valid level
+        print(f"The compression level is {level}")
+        
+        
+
+def help():
+    style = ttk.Style()
+    style.theme_use("alt")
+    compression_level_window = tk.Toplevel(master=window)
+    compression_level_window.configure(bg = '#1a1a1a')
+    compression_level_window.geometry("400x250+200+200")
+    compression_level_window.transient(master=window)
+    compression_level_window.grab_set()
+    compression_level_window.title("Help")
+   
+
 
 #side bar button
 frame = customtkinter.CTkFrame(master=window, width=160, corner_radius=0)
@@ -62,12 +119,12 @@ frame_Log = customtkinter.CTkFrame(master=window, width=200, height= 200,corner_
 frame_Log.grid(row=1, column = 1,padx=10, pady=0)
 
 header_Log = customtkinter.CTkLabel(master=frame_Log, text="Log")
-header_Log.grid(row=1, column = 0, padx=0, pady=0)
+header_Log.grid(row=1, column = 0, padx=0, pady=20)
 
 button_exit= customtkinter.CTkButton(master=frame_Log, text = "Exit", command=exit)
-button_exit.grid(row= 70, column=0,padx=50, pady=(100,15))
+button_exit.grid(row= 70, column=0,padx=50, pady=(100,40))
 
-button_option = customtkinter.CTkSegmentedButton(master=window,values=["  Compression level", "  Help "],command=option)
+button_option = customtkinter.CTkSegmentedButton(master=window,values=["  Compression level", "  Help "],command=command_function)
 button_option.grid(row=0, column = 0,padx=0, pady=10)# set initial value
 
 window.resizable(False, False)
