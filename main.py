@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # basic file compression/decompression program using zipfile module
 # please take note that the program uses comments for now to execute specific def.
+# hello
 
 # Declare important program variables
 prog_nm="CompressorWiz"
