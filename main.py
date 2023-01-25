@@ -39,7 +39,7 @@ window.title(prog_nm+"-("+prog_ver+")")
 
 def compress():
         header_compress = customtkinter.CTkLabel(master=frame_Log, text="Correct")
-        header_compress.grid(row=5, column = 0, padx=(0, 60), pady=(0, 30))
+        header_compress.grid(row=1, column = 0)
 
 def option(value):
     print("segmented button clicked:", value)
@@ -124,7 +124,7 @@ header_Log.grid(row=1, column = 0, padx=0, pady=20)
 button_exit= customtkinter.CTkButton(master=frame_Log, text = "Exit", command=exit)
 button_exit.grid(row= 70, column=0,padx=50, pady=(100,40))
 
-button_option = customtkinter.CTkSegmentedButton(master=window,values=["  Compression level", "  Help "],command=command_function)
+button_option = customtkinter.CTkSegmentedButton(master=window,values=["  Compression level   ","  Help  "],command=command_function)
 button_option.grid(row=0, column = 0,padx=0, pady=10)# set initial value
 
 window.resizable(False, False)
