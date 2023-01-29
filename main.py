@@ -51,39 +51,31 @@ def command_function(value):
           help()
 
 
-    
 def Compression_lvl():
-    style = ttk.Style()
-    style.theme_use("alt")
-    compression_level_window = gui_legacy.Toplevel(master=window)
+    compression_level_window = customtkinter.CTkToplevel(window)
     compression_level_window.configure(bg = '#1a1a1a')
-    compression_level_window.geometry("400x250+200+200")
-    compression_level_window.transient(master=window)
-    compression_level_window.grab_set()
+    compression_level_window.geometry("230x230+200+200")
     compression_level_window.title("Compression Level")
-    # create a label
-    label = gui_legacy.Label(master=compression_level_window, text="Enter the compression level (1-9):")
-    label.grid(row=0, column=0, padx=20, pady=20)
-    # create an entry widget
-    entry = gui_legacy.Entry(master=compression_level_window)
-    entry.grid(row=1, column=0, padx=0, pady=0)
-    # create a submit button
-    submit_button = gui_legacy.Button(master=compression_level_window, text="Submit", command=lambda: submit_compression_level(entry.get()))
-    submit_button.grid(row=2, column=0, padx=15, pady=15)
-    # add a close button
-    close_button = gui_legacy.Button(master=compression_level_window, text="Close", command=compression_level_window.destroy)
-    close_button.grid(row=3, column=0, padx=15, pady=15)
-    compression_level_window.columnconfigure(0, weight=1)
 
 
+    compress_text = customtkinter.CTkLabel(master=compression_level_window, text="Enter the compression level (1-9):")
+    compress_text.grid(row=0, column=2, padx=20, pady=20)
+    compress_slider = customtkinter.CTkSlider(compression_level_window, from_=0, to=9, number_of_steps=9)
+    compress_slider.grid(row=2, column=2, padx=0, pady=0, sticky="ew")
+    compress_button = customtkinter.CTkButton(compression_level_window, text="Sumbit", command = submit)
+    compress_button.grid(row=6, column=2,padx=10, pady =10)
+    compress_button = customtkinter.CTkButton(compression_level_window, text="Exit", command = compression_level_window.destroy)
+    compress_button.grid(row=7, column=2,padx=10, pady =10)
+def submit():
+    messagebox.showinfo('Compression Level', 'Compress Successfully')
 def submit_compression_level(level):
     level = int(level)
     if level < 1 or level > 9:
         messagebox.showerror("Error", "Invalid compression level")
     else:
-        # do something with the valid level
-        print(f"The compression level is {level}")
-        
+        global levels
+        levels = level
+        return levels
         
 
 def help():
