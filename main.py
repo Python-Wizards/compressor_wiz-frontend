@@ -10,6 +10,7 @@ prog_ver="0.1alpha"
 import customtkinter as gui
 import tkinter as gui_legacy
 from tkinter import ttk
+from tkinter import messagebox
 
 gui.set_appearance_mode("dark")
 gui.set_default_color_theme("dark-blue")
@@ -52,31 +53,26 @@ def command_function(value):
 
 
 def Compression_lvl():
-    compression_level_window = customtkinter.CTkToplevel(window)
+    compression_level_window = gui.CTkToplevel(window)
     compression_level_window.configure(bg = '#1a1a1a')
-    compression_level_window.geometry("230x230+200+200")
     compression_level_window.title("Compression Level")
+    compression_level_window.resizable(False,False)
 
-
-    compress_text = customtkinter.CTkLabel(master=compression_level_window, text="Enter the compression level (1-9):")
+    compress_text = gui.CTkLabel(master=compression_level_window, text="Enter the compression level (1-9):")
     compress_text.grid(row=0, column=2, padx=20, pady=20)
-    compress_slider = customtkinter.CTkSlider(compression_level_window, from_=0, to=9, number_of_steps=9)
+    compress_slider = gui.CTkSlider(compression_level_window, from_=0, to=9, number_of_steps=9)
     compress_slider.grid(row=2, column=2, padx=0, pady=0, sticky="ew")
-    compress_button = customtkinter.CTkButton(compression_level_window, text="Sumbit", command = submit)
-    compress_button.grid(row=6, column=2,padx=10, pady =10)
-    compress_button = customtkinter.CTkButton(compression_level_window, text="Exit", command = compression_level_window.destroy)
+    compress_button = gui.CTkButton(compression_level_window, text="Submit", command = compression_level_window.destroy)
     compress_button.grid(row=7, column=2,padx=10, pady =10)
-def submit():
-    messagebox.showinfo('Compression Level', 'Compress Successfully')
+
 def submit_compression_level(level):
     level = int(level)
-    if level < 1 or level > 9:
-        messagebox.showerror("Error", "Invalid compression level")
+    if level < 1:
+        levels = "zipfile.ZIP_DEFLATED"
+        return levels
     else:
-        global levels
         levels = level
         return levels
-        
 
 def help():
     style = ttk.Style()
